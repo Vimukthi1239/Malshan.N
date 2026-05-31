@@ -1,0 +1,95 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R >> >> /MediaBox [0 0 595.275 841.889] /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 620 >>
+stream
+BT
+/F1 18 Tf
+50 800 Td
+(Malshan Nawarathna - Curriculum Vitae) Tj
+0 -30 Td
+/F1 10 Tf
+(Maddegoda, Makoora, Hettimulla | +94 721298380 | 2000malshan@gmail.com) Tj
+0 -15 Td
+(LinkedIn: vimukthi1239 | GitHub: vimukthi1239) Tj
+0 -30 Td
+/F1 12 Tf
+(Professional Summary) Tj
+0 -15 Td
+/F1 9 Tf
+(High-potential Data Science undergraduate with a strong foundation in MLOps, automation,) Tj
+0 -12 Td
+(and financial stewardship. Capable of bridging technical AI deployment with fiscal reliability.) Tj
+0 -30 Td
+/F1 12 Tf
+(Technical Skills) Tj
+0 -15 Td
+/F1 9 Tf
+(Programming: Python, React, JavaScript, HTML5, CSS3, SQL (MySQL)) Tj
+0 -12 Td
+(MLOps & Cloud: Docker, GitHub Actions, n8n, AWS (Lambda, Serverless), TensorFlow, MLflow) Tj
+0 -12 Td
+(Tools: Power BI, MongoDB, Firebase, MS Excel, Pandas, NumPy, Matplotlib, Plotly) Tj
+0 -30 Td
+/F1 12 Tf
+(Education) Tj
+0 -15 Td
+/F1 9 Tf
+(BSc (Hons) in Data Science - SLTC Research University (Expected Jan 2027) - GPA: 3.01) Tj
+0 -30 Td
+/F1 12 Tf
+(Professional Experience) Tj
+0 -15 Td
+/F1 9 Tf
+(Assistant Treasurer - SLTC Media Unit (May 2025 - May 2026)) Tj
+0 -12 Td
+(Bank Teller - People's Bank Sri Lanka (April 2022 - Sept 2022)) Tj
+0 -30 Td
+/F1 12 Tf
+(Key Projects) Tj
+0 -15 Td
+/F1 9 Tf
+(- HotelEco Pro: React 19, Firebase, n8n, AI Chatbot (EcoBot)) Tj
+0 -12 Td
+(- ML-Ops Automation Framework: Python, Docker, GitHub Actions, DVC/MLflow) Tj
+0 -12 Td
+(- Database Architecture: MySQL Parking Management Script) Tj
+0 -12 Td
+(- Hotel Analytics Dashboard: n8n, Data Visualization) Tj
+0 -12 Td
+(- Serverless Backend: AWS Lambda API) Tj
+0 -30 Td
+/F1 12 Tf
+(Certifications & Research) Tj
+0 -15 Td
+/F1 9 Tf
+(IBM: AI Fundamentals | Cisco: Data Science Essentials, Data Analytics) Tj
+0 -12 Td
+(Research: FinanceGuard AI: Multimodal Federated Learning Framework (2026)) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000119 00000 n 
+0000000249 00000 n 
+0000000320 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1060
+%%EOF
