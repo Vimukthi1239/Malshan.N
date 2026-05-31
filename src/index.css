@@ -2497,3 +2497,50 @@ h1, h2, h3, h4, h5, h6 {
 .card-external-link-btn i {
     font-size: 0.85rem;
 }
+
+/* --------------------------------------------------------
+   EMPTY STATE — shown when gallery / projects list is empty
+   -------------------------------------------------------- */
+.gallery-empty-state {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    border: 2px dashed var(--border-color);
+    border-radius: 20px;
+    margin: 20px 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.gallery-empty-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.8;
+}
+
+.gallery-empty-state h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.gallery-empty-state p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 360px;
+}
+
+.gallery-empty-state p strong {
+    color: var(--accent-primary);
+}

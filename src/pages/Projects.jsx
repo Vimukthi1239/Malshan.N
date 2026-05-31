@@ -1,54 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const INITIAL_PROJECTS = [
-    {
-        title: "HotelEco Pro",
-        badge: "Production AI",
-        time: "Jan 2026 – Present",
-        description: "High-performance React 19 SPA integrated with Google Firebase. Employs n8n.io workflows to run EcoBot, an intelligent AI chatbot utilizing LLMs, and schedules automated secure booking updates.",
-        tech: ["React 19", "Firebase", "n8n", "LLMs", "Mapbox", "Docker"],
-        github: "https://github.com/vimukthi1239/hotelecopro",
-        demo: "#"
-    },
-    {
-        title: "ML-Ops Automation Framework",
-        badge: "MLOps Framework",
-        time: "Jan 2026 – March 2026",
-        description: "Automated the end-to-end Machine Learning lifecycle (from raw data preprocessing to evaluation) with GitHub Actions CI/CD. Containerized components using Docker and tracked parameters with MLflow.",
-        tech: ["Python", "Docker", "GitHub Actions", "MLflow", "DVC"],
-        github: "https://github.com/vimukthi1239/mlops-automation"
-    },
-    {
-        title: "Parking Database Architecture",
-        badge: "Database Design",
-        time: "Jan 2026 – Feb 2026",
-        description: "Designed a complete relational database model script for parking operations. Modeled structural integrity constraints, foreign key relationships, ER patterns, and query performance optimizations.",
-        tech: ["MySQL", "ER Modeling", "Relational Design"],
-        github: "https://github.com/vimukthi1239/parking-database"
-    },
-    {
-        title: "Hotel Analytics Dashboard",
-        badge: "Analytics",
-        time: "Aug 2025 – Nov 2025",
-        description: "Configured n8n automation scenarios to aggregate and filter occupancy and Average Daily Rate (ADR) stats. Built interactive visualizations to support direct operations and trends analytics.",
-        tech: ["n8n", "Data Visualization", "Analytics", "MySQL"],
-        github: "https://github.com/vimukthi1239/hotel-analytics"
-    },
-    {
-        title: "Serverless Lambda Backend",
-        badge: "Serverless",
-        time: "Jan 2025 – Feb 2025",
-        description: "Implemented and executed high-availability microservices running on AWS Lambda. Managed HTTP REST requests and database integrations via Lambda Serverless infrastructure.",
-        tech: ["AWS Lambda", "Serverless", "Python", "API Gateway"],
-        github: "https://github.com/vimukthi1239/aws-serverless-backend"
-    }
-];
+const INITIAL_PROJECTS = [];
 
 export default function Projects() {
-    // Load from LocalStorage or default
+    // Load from LocalStorage only — no default items
     const [projects, setProjects] = useState(() => {
         const saved = localStorage.getItem('portfolio_projects');
-        return saved ? JSON.parse(saved) : INITIAL_PROJECTS;
+        return saved ? JSON.parse(saved) : [];
     });
 
     // Form inputs state
@@ -128,15 +86,15 @@ export default function Projects() {
                     >
                         <i className="fa-solid fa-plus"></i> Add Project
                     </button>
-                    <button 
-                        className="admin-btn admin-btn-reset" 
-                        onClick={handleReset}
-                        title="Reset to default items"
-                    >
-                        <i className="fa-solid fa-arrow-rotate-left"></i> Reset Defaults
-                    </button>
                 </div>
                 
+                {projects.length === 0 ? (
+                    <div className="gallery-empty-state">
+                        <i className="fa-solid fa-folder-open gallery-empty-icon"></i>
+                        <h3>No Projects Yet</h3>
+                        <p>Click <strong>Add Project</strong> above to add your first project.</p>
+                    </div>
+                ) : (
                 <div className="projects-grid">
                     {projects.map((project, idx) => (
                         <article className="project-card" key={idx} style={{ position: 'relative' }}>
@@ -181,6 +139,7 @@ export default function Projects() {
                         </article>
                     ))}
                 </div>
+                )}
             </div>
 
             {/* Admin Add Project Modal Window */}

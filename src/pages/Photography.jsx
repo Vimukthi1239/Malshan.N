@@ -1,88 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Lightbox from '../components/Lightbox';
 
-const INITIAL_PHOTOS = [
-    {
-        src: "/assets/photography/landscape_sunset.png",
-        alt: "Stunning mountain landscape sunset",
-        title: "Mountain Sunset",
-        description: "Captured during the golden hour in central hills.",
-        category: "landscape"
-    },
-    {
-        src: "/assets/photography/street_neon.png",
-        alt: "Colombo neon city street lights reflections",
-        title: "Colombo Neon Street",
-        description: "Neon reflections on wet asphalt in Colombo after a quick shower.",
-        category: "street"
-    },
-    {
-        src: "/assets/photography/portrait_wise.png",
-        alt: "Sri Lankan Elder Portrait with wise expressions",
-        title: "Wise Sri Lankan Elder",
-        description: "A detailed portrait study focusing on expressions and character.",
-        category: "wildlife"
-    },
-    {
-        src: "/assets/photography/nature_waterfall.png",
-        alt: "Tropical green waterfall long exposure",
-        title: "Ravana Waterfall",
-        description: "Long exposure shot of the cascading waterfall surrounded by greenery.",
-        category: "nature"
-    },
-    {
-        src: "/assets/photography/ancient_carving.png",
-        alt: "Anuradhapura historical stone carvings",
-        title: "Ancient Stone Relief",
-        description: "Close-up detailing the textured stone carvings of Anuradhapura.",
-        category: "street"
-    },
-    {
-        src: "/assets/photography/macro_lotus.png",
-        alt: "Macro lotus flower with morning dew drops",
-        title: "Lotus Dew Drops",
-        description: "Macro details of morning dew settling on lotus petals.",
-        category: "nature"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1575550959106-5a7defe28b56?auto=format&fit=crop&w=800&q=80",
-        alt: "Majestic leopard in Yala National Park resting",
-        title: "Yala Leopard",
-        description: "Spotting a leopard resting on an acacia tree branch in Yala.",
-        category: "wildlife"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
-        alt: "Calm pink ocean dawn skies minimalist",
-        title: "Serene Coastline",
-        description: "Minimalist sunrise overlooking the quiet blue ocean waters.",
-        category: "landscape"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1555899434-94d1368aa712?auto=format&fit=crop&w=800&q=80",
-        alt: "Nuwara Eliya tea garden pickers",
-        title: "Tea Garden Smiles",
-        description: "Smiling pluckers harvesting fresh tea leaves in the high country.",
-        category: "wildlife"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=800&q=80",
-        alt: "Milky way galaxy stars over trees silhouette",
-        title: "Stars Over Kegalle",
-        description: "Astrophotography capturing the dense Milky Way arm on a clear night.",
-        category: "landscape"
-    }
-];
+const INITIAL_PHOTOS = [];
 
 export default function Photography() {
     const [activeFilter, setActiveFilter] = useState('all');
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
 
-    // Load photos from localStorage or fall back to default
+    // Load photos from localStorage only — no default items
     const [photos, setPhotos] = useState(() => {
         const saved = localStorage.getItem('portfolio_photography');
-        return saved ? JSON.parse(saved) : INITIAL_PHOTOS;
+        return saved ? JSON.parse(saved) : [];
     });
 
     // Form inputs state
@@ -246,6 +175,13 @@ export default function Photography() {
                 </div>
 
                 {/* Gallery Grid */}
+                {filteredPhotos.length === 0 ? (
+                    <div className="gallery-empty-state">
+                        <i className="fa-solid fa-camera-retro gallery-empty-icon"></i>
+                        <h3>No Photos Yet</h3>
+                        <p>Click <strong>Add Album</strong> above to upload your first photo.</p>
+                    </div>
+                ) : (
                 <div className="gallery-grid">
                     {filteredPhotos.map((photo, idx) => (
                         <div
@@ -298,6 +234,7 @@ export default function Photography() {
                         </div>
                     ))}
                 </div>
+                )}
             </div>
 
             {/* Admin Add Photo Modal Window */}
