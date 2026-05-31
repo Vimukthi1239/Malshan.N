@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Lightbox from '../components/Lightbox';
-
-const INITIAL_PHOTOS = [];
+import { DEFAULT_PHOTOS } from '../data/portfolioData';
 
 export default function Photography() {
     const [activeFilter, setActiveFilter] = useState('all');
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
 
-    // Load photos from localStorage only — no default items
+    // Merge DEFAULT_PHOTOS (from data store) with user-added photos (from localStorage)
     const [photos, setPhotos] = useState(() => {
-        const saved = localStorage.getItem('portfolio_photography');
-        return saved ? JSON.parse(saved) : [];
+        const saved = localStorage.getItem('portfolio_photography_custom');
+        const custom = saved ? JSON.parse(saved) : [];
+        return [...custom, ...DEFAULT_PHOTOS];
     });
 
     // Form inputs state
@@ -24,14 +24,22 @@ export default function Photography() {
     const [fileError, setFileError] = useState('');
     const [externalLink, setExternalLink] = useState('');
 
+    // Save only CUSTOM (user-added) photos to localStorage — defaults come from data store
+    const [customPhotos, setCustomPhotos] = useState(() => {
+        const saved = localStorage.getItem('portfolio_photography_custom');
+        return saved ? JSON.parse(saved) : [];
+    });
+
     // Save to LocalStorage
     useEffect(() => {
         try {
-            localStorage.setItem('portfolio_photography', JSON.stringify(photos));
+            localStorage.setItem('portfolio_photography_custom', JSON.stringify(customPhotos));
+            // Rebuild merged list whenever custom photos change
+            setPhotos([...customPhotos, ...DEFAULT_PHOTOS]);
         } catch (error) {
             console.error("Failed to save to local storage:", error);
         }
-    }, [photos]);
+    }, [customPhotos]);
 
     // Filter images based on active selection
     const filteredPhotos = photos.filter(photo => {
@@ -99,7 +107,7 @@ export default function Photography() {
             externalLink: externalLink || null
         };
 
-        setPhotos(prev => [newPhoto, ...prev]);
+        setCustomPhotos(prev => [newPhoto, ...prev]);
         setActiveFilter('all'); // Ensure new photo displays at the front of the album
         closeModal();
     };
@@ -117,14 +125,20 @@ export default function Photography() {
 
     const handleDelete = (e, photoToDelete) => {
         e.stopPropagation(); // Prevent opening lightbox modal when clicking trash can
+        // Check if this photo is a default — defaults cannot be deleted via UI
+        const isDefault = DEFAULT_PHOTOS.some(p => p.src === photoToDelete.src);
+        if (isDefault) {
+            alert("Default photos cannot be deleted. Edit portfolioData.js to remove them.");
+            return;
+        }
         if (window.confirm("Are you sure you want to delete this photo from the album?")) {
-            setPhotos(prev => prev.filter(photo => photo !== photoToDelete));
+            setCustomPhotos(prev => prev.filter(photo => photo !== photoToDelete));
         }
     };
 
     const handleReset = () => {
-        if (window.confirm("Reset all photography items to original list? This will remove custom additions.")) {
-            setPhotos(INITIAL_PHOTOS);
+        if (window.confirm("Remove all custom photos? (Default photos in portfolioData.js will remain)")) {
+            setCustomPhotos([]);
         }
     };
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+const BASE = import.meta.env.BASE_URL;
+
 export default function Home() {
     const roles = ["Data Scientist", "MLOps Engineer", "Automation Developer", "Photographer"];
     const [roleIndex, setRoleIndex] = useState(0);
@@ -52,7 +54,7 @@ export default function Home() {
                         <Link to="/projects" className="btn btn-primary">
                             Explore Projects <i className="fa-solid fa-arrow-right"></i>
                         </Link>
-                        <a href="/assets/Malshan_Nawarathna_CV.pdf" className="btn btn-outline" download="Malshan_Nawarathna_CV.pdf">
+                        <a href={`${BASE}assets/Malshan_Nawarathna_CV.pdf`} className="btn btn-outline" download="Malshan_Nawarathna_CV.pdf">
                             Download CV <i className="fa-solid fa-file-arrow-down"></i>
                         </a>
                     </div>
@@ -77,7 +79,7 @@ export default function Home() {
                     <div className="hero-avatar-container">
                         <div className="avatar-glow-effect"></div>
                         <div className="avatar-frame">
-                            <img src="/assets/profile.jpg" alt="Malshan Nawarathna" className="hero-avatar" />
+                            <img src={`${BASE}assets/profile.jpg`} alt="Malshan Nawarathna" className="hero-avatar" />
                             <div className="avatar-light-ray"></div>
                         </div>
                     </div>

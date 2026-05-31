@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-
-const INITIAL_PROJECTS = [];
+import { DEFAULT_PROJECTS } from '../data/portfolioData';
 
 export default function Projects() {
-    // Load from LocalStorage only — no default items
+    // Merge DEFAULT_PROJECTS (from data store) with user-added projects (from localStorage)
     const [projects, setProjects] = useState(() => {
-        const saved = localStorage.getItem('portfolio_projects');
-        return saved ? JSON.parse(saved) : [];
+        const saved = localStorage.getItem('portfolio_projects_custom');
+        const custom = saved ? JSON.parse(saved) : [];
+        return [...custom, ...DEFAULT_PROJECTS];
     });
 
     // Form inputs state
@@ -19,10 +19,17 @@ export default function Projects() {
     const [github, setGithub] = useState('');
     const [demo, setDemo] = useState('');
 
-    // Save to LocalStorage
+    // Save only CUSTOM (user-added) projects to localStorage — defaults come from data store
+    const [customProjects, setCustomProjects] = useState(() => {
+        const saved = localStorage.getItem('portfolio_projects_custom');
+        return saved ? JSON.parse(saved) : [];
+    });
+
     useEffect(() => {
-        localStorage.setItem('portfolio_projects', JSON.stringify(projects));
-    }, [projects]);
+        localStorage.setItem('portfolio_projects_custom', JSON.stringify(customProjects));
+        // Rebuild merged list whenever custom projects change
+        setProjects([...customProjects, ...DEFAULT_PROJECTS]);
+    }, [customProjects]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,7 +50,7 @@ export default function Projects() {
             demo: demo || undefined
         };
 
-        setProjects(prev => [newProject, ...prev]);
+        setCustomProjects(prev => [newProject, ...prev]);
         closeModal();
     };
 
@@ -59,14 +66,19 @@ export default function Projects() {
     };
 
     const handleDelete = (indexToDelete) => {
+        // Only custom (user-added) projects can be deleted
+        if (indexToDelete >= customProjects.length) {
+            alert("Default projects cannot be deleted. Edit portfolioData.js to remove them.");
+            return;
+        }
         if (window.confirm("Are you sure you want to delete this project?")) {
-            setProjects(prev => prev.filter((_, idx) => idx !== indexToDelete));
+            setCustomProjects(prev => prev.filter((_, idx) => idx !== indexToDelete));
         }
     };
 
     const handleReset = () => {
-        if (window.confirm("Reset all projects to original list? This will remove custom projects.")) {
-            setProjects(INITIAL_PROJECTS);
+        if (window.confirm("Remove all custom projects? (Default projects in portfolioData.js will remain)")) {
+            setCustomProjects([]);
         }
     };
 
